@@ -10,5 +10,6 @@ wheels/
 .venv
 
 translated/
+config/
 
 .DS_Store
