@@ -1,0 +1,5 @@
+flask
+toml
+pypdf
+argparse
+PyMuPDF
