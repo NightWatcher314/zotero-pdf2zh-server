@@ -24,8 +24,9 @@ class ZoteroPdf2zh < Formula
       set -euo pipefail
       ROOT="#{opt_libexec}"
       DATA="#{var}/zotero-pdf2zh"
-      # Prefer the Homebrew Python if available to avoid downloads
-      export UV_PYTHON_DOWNLOADS="prefer-system"
+      # Use Homebrew Python 3.12 and avoid automatic downloads
+      export UV_PYTHON_DOWNLOADS="never"
+      export UV_PYTHON="#{Formula["python@3.12"].opt_bin}/python3.12"
       # Prepare writable directories and link them into the install tree
       mkdir -p "$DATA/config" "$DATA/translated"
       cd "$ROOT"
@@ -52,4 +53,3 @@ class ZoteroPdf2zh < Formula
     system bin/"zotero-pdf2zh", "--help"
   end
 end
-
