@@ -11,8 +11,6 @@ class ZoteroPdf2zh < Formula
   head "https://github.com/NightWatcher314/homebrew-zotero-pdf2zh.git", branch: "main"
 
   depends_on "uv"
-  # Optional but recommended so uv can prefer system Python instead of downloading one.
-  depends_on "python@3.12"
 
   def install
     # Install the whole project into libexec so we can run it in-place with uv.
@@ -26,11 +24,7 @@ class ZoteroPdf2zh < Formula
       DATA="#{var}/zotero-pdf2zh"
       SRC_CFG="$ROOT/config"
       DST_CFG="$DATA/config"
-      # Force a clean UV_PYTHON_DOWNLOADS to avoid inherited invalid values
-      # unset UV_PYTHON_DOWNLOADS || true
-      # # Pin uv to Homebrew's Python 3.12
-      # export UV_PYTHON="#{Formula["python@3.12"].opt_bin}/python3.12"
-      # Prepare writable directories
+
       mkdir -p "$DST_CFG" "$DATA/translated"
       # Seed example config files into writable config dir (if missing)
       if [ -d "$SRC_CFG" ]; then
