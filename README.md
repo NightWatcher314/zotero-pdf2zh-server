@@ -43,6 +43,16 @@
 
 5.  **开始翻译**: 在 Zotero 中右键点击一个 PDF 附件，然后选择翻译选项。
 
+6.  **查看日志**
+
+    您可以使用 `tail` 命令查看服务的日志输出：
+
+    ```bash
+    tail -f "$(brew --prefix)/var/log/zotero-pdf2zh.log"
+    ```
+
+    如果日志文件路径不同，请根据实际情况调整路径。
+
 ## 更新
 
 您可以使用 `brew` 来更新 `zotero-pdf2zh` 到最新版本：
