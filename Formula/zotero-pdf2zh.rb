@@ -1,6 +1,6 @@
 class ZoteroPdf2zh < Formula
   desc "Zotero PDF → ZH local server (uv-based)"
-  homepage "https://github.com/guaguastandup/zotero-pdf2zh"
+  homepage "https://github.com/NightWatcher314/homebrew-zotero-pdf2zh"
   # Replace the following url/sha256 with your own release tarball when publishing.
   # Example: a release created from this repository containing the project files at root.
   # url "https://github.com/<you>/<repo>/archive/refs/tags/vX.Y.Z.tar.gz"
@@ -8,7 +8,7 @@ class ZoteroPdf2zh < Formula
 
   # For development/use without a release tarball, you can install from HEAD
   # after pushing this repo to a remote and using --HEAD.
-  head "ssh://git@192.168.35.100:43022/NightWatcher/zotero-pdf2zh.git", branch: "main"
+  head "https://github.com/NightWatcher314/homebrew-zotero-pdf2zh.git", branch: "main"
 
   depends_on "uv"
   # Optional but recommended so uv can prefer system Python instead of downloading one.
