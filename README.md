@@ -1,7 +1,5 @@
 # Homebrew Tap for zotero-pdf2zh
 
-[![CI](https://github.com/NightWatcher314/homebrew-zotero-pdf2zh/actions/workflows/ci.yml/badge.svg)](https://github.com/NightWatcher314/homebrew-zotero-pdf2zh/actions/workflows/ci.yml)
-
 这是一个用于 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf-translate) 的 Homebrew Tap，它提供了一个本地 Zotero PDF 翻译服务器。
 
 ## 安装与使用 (macOS)
@@ -11,7 +9,7 @@
 1.  **Tap 本仓库:**
 
     ```bash
-    brew tap NightWatcher314/zotero-pdf2zh
+    brew tap NightWatcher314/formula
     ```
 
 2.  **安装 zotero-pdf2zh:**
