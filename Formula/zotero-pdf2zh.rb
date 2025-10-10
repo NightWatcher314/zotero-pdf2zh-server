@@ -24,13 +24,27 @@ class ZoteroPdf2zh < Formula
       set -euo pipefail
       ROOT="#{opt_libexec}"
       DATA="#{var}/zotero-pdf2zh"
-      # Use Homebrew Python 3.12 and avoid automatic downloads
-      export UV_PYTHON_DOWNLOADS="never"
+      SRC_CFG="$ROOT/config"
+      DST_CFG="$DATA/config"
+      # Force a clean UV_PYTHON_DOWNLOADS to avoid inherited invalid values
+      unset UV_PYTHON_DOWNLOADS || true
+      # Pin uv to Homebrew's Python 3.12
       export UV_PYTHON="#{Formula["python@3.12"].opt_bin}/python3.12"
-      # Prepare writable directories and link them into the install tree
-      mkdir -p "$DATA/config" "$DATA/translated"
+      # Prepare writable directories
+      mkdir -p "$DST_CFG" "$DATA/translated"
+      # Seed example config files into writable config dir (if missing)
+      if [ -d "$SRC_CFG" ]; then
+        for f in "$SRC_CFG"/*.example; do
+          [ -f "$f" ] || continue
+          base="$(basename "$f")"
+          if [ ! -f "$DST_CFG/$base" ]; then
+            cp "$f" "$DST_CFG/$base"
+          fi
+        done
+      fi
+      # Link writable data into install tree and run
       cd "$ROOT"
-      ln -snf "$DATA/config" config
+      ln -snf "$DST_CFG" config
       ln -snf "$DATA/translated" translated
       # Run the server (pass through any extra args)
       exec "#{Formula["uv"].opt_bin}/uv" run server.py "$@"
