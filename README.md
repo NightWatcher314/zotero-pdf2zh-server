@@ -1,6 +1,6 @@
 # Homebrew Tap for zotero-pdf2zh
 
-这是一个用于 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf-translate) 的 Homebrew Tap，它提供了一个本地 Zotero PDF 翻译服务器。
+这是一个用于 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew Tap，它提供了一个本地 Zotero PDF 翻译服务器。
 
 ## 安装与使用 (macOS)
 
