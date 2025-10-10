@@ -27,9 +27,9 @@ class ZoteroPdf2zh < Formula
       SRC_CFG="$ROOT/config"
       DST_CFG="$DATA/config"
       # Force a clean UV_PYTHON_DOWNLOADS to avoid inherited invalid values
-      unset UV_PYTHON_DOWNLOADS || true
-      # Pin uv to Homebrew's Python 3.12
-      export UV_PYTHON="#{Formula["python@3.12"].opt_bin}/python3.12"
+      # unset UV_PYTHON_DOWNLOADS || true
+      # # Pin uv to Homebrew's Python 3.12
+      # export UV_PYTHON="#{Formula["python@3.12"].opt_bin}/python3.12"
       # Prepare writable directories
       mkdir -p "$DST_CFG" "$DATA/translated"
       # Seed example config files into writable config dir (if missing)
