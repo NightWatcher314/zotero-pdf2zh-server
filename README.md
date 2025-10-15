@@ -2,6 +2,15 @@
 
 这是一个用于 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew ，它提供了一个本地 Zotero PDF 翻译服务器。
 
+
+## 重要说明！
+
+本项目现在直接使用 [上游的代码](https://github.com/guaguastandup/zotero-pdf2zh) 进行更新，不再自己维护 server 的代码（自己维护可能会导致部分功能与上游出现冲突）
+
+formula 以及自动更新的 CI 流程位于 [NightWatcher314/homebrew-formula](https://github.com/NightWatcher314/homebrew-formula) 中，请前往该仓库查看最新的更新日志和版本信息。
+
+下面的安装与使用说明目前均适用，后续请以上游仓库的说明为准，欢迎 star formula 仓库。
+
 ## 安装与使用 (macOS)
 
 这是为 macOS 用户推荐的安装方式。
@@ -63,5 +72,4 @@ brew upgrade zotero-pdf2zh
 
 ```bash
 brew uninstall zotero-pdf2zh
-brew untap NightWatcher314/zotero-pdf2zh
 ```
