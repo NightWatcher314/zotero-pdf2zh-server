@@ -1,17 +1,16 @@
-# Homebrew for zotero-pdf2zh-server
+# zotero-pdf2zh-server 安装工具
 
-这是一个用于 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew ，它提供了一个本地 Zotero PDF 翻译服务器。
-
+这是 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew 安装脚本，让你可以轻松在本地部署 Zotero PDF 翻译服务器。
 
 ## 重要说明！
 
-本项目现在直接使用 [上游的代码](https://github.com/guaguastandup/zotero-pdf2zh) 进行更新，不再自己维护 server 的代码（自己维护可能会导致部分功能与上游出现冲突）
-
 formula 以及自动更新的 CI 流程位于 [NightWatcher314/homebrew-formula](https://github.com/NightWatcher314/homebrew-formula) 中，请前往该仓库查看最新的更新日志和版本信息。
 
-下面的安装与使用说明目前均适用，后续请以上游仓库的说明为准，欢迎 star formula 仓库。
+下面的安装与使用说明目前均适用，后续请以上游仓库的说明为准，欢迎 star 本仓库。
 
-## 安装与使用 (macOS)
+## 安装与使用
+
+### macOS
 
 这是为 macOS 用户推荐的安装方式。
 
@@ -28,37 +27,62 @@ formula 以及自动更新的 CI 流程位于 [NightWatcher314/homebrew-formula]
     ```
 
 3.  **启动服务:**
-    推荐使用 `brew services` 将其作为后台服务运行，这样开机后会自动启动。
 
-    ```bash
-    brew services start zotero-pdf2zh
-    ```
+    **首次使用（必需步骤）：**
 
-    服务将默认在 `http://127.0.0.1:47700` 上运行。
-
-    您也可以手动运行它以进行调试或使用不同参数：
+    先手动运行以下命令来下载所需的字体和依赖包：
 
     ```bash
     zotero-pdf2zh --port 47700
     ```
 
-4.  **配置 Zotero 插件**:
+    等待命令执行完成，您会看到服务启动的输出。
 
-    - 打开 Zotero。
-    - 进入 Zotero PDF Translate 插件的设置。
-    - 在服务器配置部分，确保 Python 服务器的地址和端口与您启动服务时使用的匹配。默认情况下，地址是 `http://127.0.0.1`，端口是 `47700`。
+    **后续使用：**
+
+    确认服务能正常运行后，使用 `brew services` 将其作为后台服务，这样开机后会自动启动：
+
+    ```bash
+    brew services start zotero-pdf2zh
+    ```
+
+    **调试或使用自定义参数：**
+
+    如需调试或使用不同参数，仍可手动运行：
+
+    ```bash
+    zotero-pdf2zh --port 47700
+    ```
+
+4.  **配置 Zotero 插件（必须）**:
+
+    - 打开 Zotero，进入 Zotero PDF Translate 插件的设置
+    - 在服务器配置部分，填入地址 `http://127.0.0.1`，端口 `47700`
+    - 这一步必须完成，否则插件无法连接到本地服务器
 
 5.  **开始翻译**: 在 Zotero 中右键点击一个 PDF 附件，然后选择翻译选项。
 
 6.  **查看日志**
 
-    您可以使用 `tail` 命令查看服务的日志输出：
+    您可以使用以下命令查看最近的实时日志输出：
 
     ```bash
     tail -f "$(brew --prefix)/var/log/zotero-pdf2zh.log"
     ```
 
-    如果日志文件路径不同，请根据实际情况调整路径。
+    或者查看最后 50 行：
+
+    ```bash
+    tail -n 50 "$(brew --prefix)/var/log/zotero-pdf2zh.log"
+    ```
+
+    如果日志文件路径不同，请根据实际情况调整。
+
+### Linux (使用 Linuxbrew)
+
+安装步骤与 macOS 相同，只需运行上述命令即可。唯一的区别是：
+
+- Linux 上使用系统服务管理工具（如 systemd）启动或在后台运行，而不是 `brew services`
 
 ## 更新
 
@@ -73,3 +97,29 @@ brew upgrade zotero-pdf2zh
 ```bash
 brew uninstall zotero-pdf2zh
 ```
+
+## 问题反馈
+
+如果遇到问题，请在 [GitHub Issues](https://github.com/NightWatcher314/zotero-pdf2zh-server/issues) 中提交反馈。提交 issue 时，请提供以下信息以便快速定位问题：
+
+1. **系统信息**：
+
+   - 操作系统（macOS、Linux）
+
+2. **服务日志**:
+
+   - 提供最近的服务日志输出：
+     ```bash
+     tail -n 100 "$(brew --prefix)/var/log/zotero-pdf2zh.log"
+     ```
+
+3. **版本信息**：
+
+   - 运行以下命令查看安装的版本：
+     ```bash
+     brew info zotero-pdf2zh
+     ```
+
+4. **具体问题描述**：
+   - 问题发生时的具体操作步骤
+   - 错误信息或异常行为的详细描述
