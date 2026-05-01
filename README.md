@@ -2,7 +2,7 @@
 
 这是 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew 安装脚本，让你可以轻松在本地部署 Zotero PDF 翻译服务器。
 
-目前已更新至 v4.0.0
+目前已更新至 v4.0.3
 
 ## 重要说明！
 
