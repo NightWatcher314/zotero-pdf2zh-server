@@ -1,6 +1,21 @@
 # zotero-pdf2zh-server 安装工具
 
-> 如果你在找一个更精简、集成度更高的后续版本，可以看看我维护的 fork：[zotero-pdf2zh-next](https://github.com/NightWatcher314/zotero-pdf2zh-next)。它保留 Zotero 插件和 Python 服务两部分，服务端使用 `uv` 管理依赖，支持任务面板、多输出模式，并提供 Docker 与 Homebrew 安装方式。这个仓库仍然是 `zotero-pdf2zh` 的 Homebrew 安装脚本，适合继续使用当前稳定方案的用户。
+## 推荐新用户使用 zotero-pdf2zh-next
+
+我现在主要维护的是后续项目：[zotero-pdf2zh-next](https://github.com/NightWatcher314/zotero-pdf2zh-next)。
+
+`zotero-pdf2zh-next` 仍然面向 Zotero PDF 翻译，但把插件端和本地 Python 服务一起维护，重点改善了安装、任务管理和日常使用体验：
+
+- 支持 Zotero 7 及以上版本。
+- 插件内置任务面板，可以查看进度、取消任务、重试失败任务和导入结果。
+- 支持同时输出中文 PDF 和双语 PDF。
+- 偏好页可以直接查看插件端和服务端版本，并检查连接与 LLM 配置。
+- 服务端提供 Homebrew、Docker 和源码启动方式，依赖统一使用 `uv` 管理。
+- 已支持禁用自动术语提取等新选项。
+
+如果你是新安装或希望继续获得功能更新，建议直接使用 [zotero-pdf2zh-next](https://github.com/NightWatcher314/zotero-pdf2zh-next)。
+
+本仓库保留为 `zotero-pdf2zh` 原方案的 Homebrew 安装脚本，适合继续使用旧版稳定流程的用户。
 
 这是 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew 安装脚本，让你可以轻松在本地部署 Zotero PDF 翻译服务器。
 
