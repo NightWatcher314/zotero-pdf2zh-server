@@ -24,7 +24,7 @@
 
 formula 以及自动更新的 CI 流程位于 [NightWatcher314/homebrew-formula](https://github.com/NightWatcher314/homebrew-formula) 中，请前往该仓库查看最新的更新日志和版本信息。
 
-上面的版本号由本仓库 workflow 从 Homebrew formula 自动同步。
+上面的版本号由 `homebrew-formula` 的自动更新 workflow 同步。
 
 下面的安装与使用说明目前均适用，后续请以上游仓库的说明为准，欢迎 star 本仓库。
 
