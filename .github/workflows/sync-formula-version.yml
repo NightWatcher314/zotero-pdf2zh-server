@@ -1,0 +1,66 @@
+name: Sync Homebrew formula version
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 0 * * *"
+
+concurrency:
+  group: sync-homebrew-formula-version
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Sync README version
+        id: sync
+        env:
+          FORMULA_REPO: NightWatcher314/homebrew-formula
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          CURRENT_VERSION=$(sed -n 's|.*formula-version:zotero-pdf2zh --> \(v[0-9][0-9.]*\).*|\1|p' README.md | head -n 1)
+          FORMULA=$(gh api "repos/$FORMULA_REPO/contents/Formula/zotero-pdf2zh.rb?ref=main" --jq .content | base64 --decode)
+          FORMULA_VERSION=$(printf '%s\n' "$FORMULA" | sed -n 's|.*releases/download/\(v[0-9][0-9.]*\)/server.zip.*|\1|p' | head -n 1)
+
+          if [ -z "$CURRENT_VERSION" ]; then
+            echo "Cannot determine current version from README marker." >&2
+            exit 1
+          fi
+
+          if ! [[ "$FORMULA_VERSION" =~ ^v[0-9]+(\.[0-9]+)*$ ]]; then
+            echo "Cannot determine a valid version from Homebrew formula: ${FORMULA_VERSION:-missing}" >&2
+            exit 1
+          fi
+
+          echo "version=$FORMULA_VERSION" >> "$GITHUB_OUTPUT"
+
+          if [ "$CURRENT_VERSION" = "$FORMULA_VERSION" ]; then
+            echo "README already matches formula: $FORMULA_VERSION"
+            echo "update_needed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          sed -i "s|formula-version:zotero-pdf2zh --> v[0-9][0-9.]*|formula-version:zotero-pdf2zh --> $FORMULA_VERSION|" README.md
+          grep -Fq "formula-version:zotero-pdf2zh --> $FORMULA_VERSION" README.md
+          git diff --check
+          echo "update_needed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push README
+        if: steps.sync.outputs.update_needed == 'true'
+        env:
+          VERSION: ${{ steps.sync.outputs.version }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m "docs: sync zotero-pdf2zh to $VERSION"
+          git push

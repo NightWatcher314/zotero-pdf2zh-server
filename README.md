@@ -18,11 +18,13 @@
 
 这是 [zotero-pdf2zh](https://github.com/guaguastandup/zotero-pdf2zh) 的 Homebrew 安装脚本，让你可以轻松在本地部署 Zotero PDF 翻译服务器。
 
-目前已更新至 v4.0.3
+目前已更新至 <!-- formula-version:zotero-pdf2zh --> v4.0.3
 
 ## 重要说明！
 
 formula 以及自动更新的 CI 流程位于 [NightWatcher314/homebrew-formula](https://github.com/NightWatcher314/homebrew-formula) 中，请前往该仓库查看最新的更新日志和版本信息。
+
+上面的版本号由本仓库 workflow 从 Homebrew formula 自动同步。
 
 下面的安装与使用说明目前均适用，后续请以上游仓库的说明为准，欢迎 star 本仓库。
 
